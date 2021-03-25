@@ -14,6 +14,5 @@ class MainActivity : AppCompatActivity() {
         //mengubah text id yang ada ke tulisan yg diinginkan
         /*tv_main_title.text = "Hello Sadewa!"
         tv_main_title.textSize = 30.0f //float ada tambahan f dibelakang nilai*/
-
     }
 }
