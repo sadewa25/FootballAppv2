@@ -4,5 +4,6 @@ data class ItemCustomList(
     //wajib
     val nama: String,
     //ketika menjadi opsional
-    val price: String? = null
+    val price: String? = null,
+    val image: Int
 )

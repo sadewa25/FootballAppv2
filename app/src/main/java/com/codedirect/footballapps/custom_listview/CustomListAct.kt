@@ -1,7 +1,7 @@
 package com.codedirect.footballapps.custom_listview
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.codedirect.footballapps.R
 import com.codedirect.footballapps.adapter.AdapterCustomList
 import com.codedirect.footballapps.model.ItemCustomList
@@ -17,10 +17,10 @@ class CustomListAct : AppCompatActivity() {
 
     private fun setupCustomList() {
         val data = arrayListOf(
-            ItemCustomList("Karpet", "Rp. 10.000"),
+            ItemCustomList("Karpet", "Rp. 10.000", R.drawable.ic_circle),
             //apabila tidak urut dapat menggunakan seperti dibawah
-            ItemCustomList(price = "Rp. 12.000", nama = "Nivea Men"),
-            ItemCustomList("Biore"),
+            ItemCustomList(price = "Rp. 12.000", nama = "Nivea Men", image = R.drawable.ic_flood),
+            ItemCustomList("Biore", image = R.drawable.ic_circle),
         )
         val adapter = AdapterCustomList(data)
         list_custom.adapter = adapter

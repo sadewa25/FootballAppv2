@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.TextView
 import com.codedirect.footballapps.R
 import com.codedirect.footballapps.model.ItemCustomList
@@ -32,9 +33,11 @@ class AdapterCustomList(val data: ArrayList<ItemCustomList>): BaseAdapter() {
         // menghubungkan item widget layout dan adapter
         val tvItemName = convertView?.findViewById<TextView>(R.id.tv_item_custom)
         val tvItemPrice = convertView?.findViewById<TextView>(R.id.tv_price_custom)
+        val ivItemIcon = convertView?.findViewById<ImageView>(R.id.iv_item_custom)
         // set the value/ beri nilai pada objeknyua
         tvItemName?.text = item.nama
         tvItemPrice?.text = item.price
+        ivItemIcon?.setImageResource(item.image)
         return convertView
     }
 }
