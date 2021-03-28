@@ -10,15 +10,14 @@
         android:id="@+id/tv_main_value"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
         android:fontFamily="@font/shadows_into_light_two"
         android:gravity="center"
         android:text="@string/starting_point"
         android:textColor="@color/black"
         android:textSize="@dimen/text_medium"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,38 +28,49 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/spin_main"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_default"
         android:layout_marginTop="@dimen/margin_default"
-        android:text="@string/str_add"
-        android:textColor="@android:color/white"
-        app:icon="@drawable/ic_baseline_add_24"
-        android:onClick="adding"
-        app:layout_constraintEnd_toStartOf="@+id/gl_main_middle"
+        android:entries="@array/change_value"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_main_value" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_default"
-        android:text="@string/str_minus"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:onClick="adding"
+        android:text="@string/str_add"
         android:textColor="@android:color/white"
-        app:icon="@drawable/ic_baseline_trending_flat_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="minus"
-        app:layout_constraintStart_toStartOf="@+id/gl_main_middle"
-        app:layout_constraintTop_toBottomOf="@+id/tv_main_value" />
+        app:icon="@drawable/ic_baseline_add_24"
+        app:layout_constraintEnd_toStartOf="@+id/gl_main_middle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spin_main" />
 
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
+        android:onClick="minus"
+        android:text="@string/str_minus"
+        android:textColor="@android:color/white"
+        app:icon="@drawable/ic_baseline_trending_flat_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/gl_main_middle"
+        app:layout_constraintTop_toBottomOf="@+id/spin_main" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:onClick="reset"
         android:text="@string/str_reset"
         android:textColor="@android:color/white"
-        android:onClick="reset"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialButton" />

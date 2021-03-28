@@ -11,4 +11,10 @@
     <string name="str_add">Tambah</string>
     <string name="str_minus">Kurang</string>
     <string name="str_reset">Reset</string>
+
+    <string-array name="change_value">
+        <item>Kelipatan 1</item>
+        <item>Kelipatan 2</item>
+        <item>Kelipatan 3</item>
+    </string-array>
 </resources>
