@@ -7,31 +7,18 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/tv_reg_welcome"
+        android:id="@+id/tv_main_value"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@android:color/holo_green_dark"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/shadows_into_light_two"
         android:gravity="center"
-        android:text="@string/welcome_register"
-        android:textColor="@color/white"
-        android:textSize="16sp"
+        android:text="@string/starting_point"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_medium"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/gl_main_middle" />
-
-    <TextView
-        android:id="@+id/tv_reg_subwelcome"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:text="@string/welcome_register"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/gl_main_middle"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +26,43 @@
         android:id="@+id/gl_main_middle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        android:text="@string/str_add"
+        android:textColor="@android:color/white"
+        app:icon="@drawable/ic_baseline_add_24"
+        android:onClick="adding"
+        app:layout_constraintEnd_toStartOf="@+id/gl_main_middle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_main_value" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_default"
+        android:text="@string/str_minus"
+        android:textColor="@android:color/white"
+        app:icon="@drawable/ic_baseline_trending_flat_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="minus"
+        app:layout_constraintStart_toStartOf="@+id/gl_main_middle"
+        app:layout_constraintTop_toBottomOf="@+id/tv_main_value" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:text="@string/str_reset"
+        android:textColor="@android:color/white"
+        android:onClick="reset"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

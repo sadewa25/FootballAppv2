@@ -7,4 +7,8 @@
     <string name="register">Daftar</string>
     <string name="welcome_register">Silahkan Mendaftar</string>
     <string name="ic_login">Ikon Login</string>
+    <string name="starting_point">0</string>
+    <string name="str_add">Tambah</string>
+    <string name="str_minus">Kurang</string>
+    <string name="str_reset">Reset</string>
 </resources>
