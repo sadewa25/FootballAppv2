@@ -3,6 +3,8 @@ package com.codedirect.footballapps
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -13,6 +15,12 @@ class MainActivity : AppCompatActivity() {
 
     //variabel dinamis untuk spinner
     private var value = 1
+
+    //variabel dinamis untuk arraynya
+    private var dataArray = arrayListOf<String>()
+
+    // untuk penundaan inisialisasi vairabel
+    private lateinit var adapter: ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +33,22 @@ class MainActivity : AppCompatActivity() {
 
         //Aksi ketika terjadi perubahan pada spinner
         setSpinnerChanged()
+        //aksi untuk listview
+        setListView()
+    }
 
+    private fun setListView() {
+        //datanya
+        // val data = arrayListOf("Arsenal", "Persebaya", "Persib")
+        //wadahnya atau adapternya atau tempat desain yg diharapkan
+        adapter = ArrayAdapter(applicationContext, android.R.layout.simple_list_item_1, dataArray)
+        //hubungkan listview dg wadahnya
+        list_main_simple.adapter = adapter
+
+        //aksi pada tiap item
+        list_main_simple.setOnItemClickListener { adapterView, view, i, l ->
+            Toast.makeText(applicationContext, dataArray[i], Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setSpinnerChanged() {
@@ -45,15 +68,26 @@ class MainActivity : AppCompatActivity() {
     fun adding(v: View) {
         startPoint = startPoint.plus(value)
         tv_main_value.text = startPoint.toString()
+
+        dataArray.add(startPoint.toString())
+        //refresh data perubahan
+        adapter.notifyDataSetChanged()
     }
 
     fun minus(v: View) {
         startPoint = startPoint.minus(value)
         tv_main_value.text = startPoint.toString()
+
+        if (!dataArray.isNullOrEmpty())
+            dataArray.removeAt(dataArray.size - 1)
+        adapter.notifyDataSetChanged()
     }
 
     fun reset(v: View) {
         startPoint = 0
         tv_main_value.text = startPoint.toString()
+
+        dataArray.clear()
+        adapter.notifyDataSetChanged()
     }
 }
