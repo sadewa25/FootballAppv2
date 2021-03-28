@@ -1,11 +1,13 @@
 package com.codedirect.footballapps
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.codedirect.footballapps.custom_listview.CustomListAct
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     //public variable to change the data
     private var startPoint = 0
 
-    //variabel dinamis untuk spinner
+    //variabel dinamis/ global untuk spinner
     private var value = 1
 
     //variabel dinamis untuk arraynya
@@ -89,5 +91,9 @@ class MainActivity : AppCompatActivity() {
 
         dataArray.clear()
         adapter.notifyDataSetChanged()
+    }
+
+    fun toCustomList(view: View) {
+        startActivity(Intent(this, CustomListAct::class.java))
     }
 }

@@ -11,6 +11,9 @@
     <string name="str_add">Tambah</string>
     <string name="str_minus">Kurang</string>
     <string name="str_reset">Reset</string>
+    <string name="ic_item_custom">Ikon List Custom</string>
+    <string name="custom_list">Custom List</string>
+    <string name="recyclerview">RecyclerView</string>
 
     <string-array name="change_value">
         <item>Kelipatan 1</item>

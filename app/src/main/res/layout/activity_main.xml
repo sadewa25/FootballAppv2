@@ -40,6 +40,26 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_main_value" />
 
     <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="toCustomList"
+        android:text="@string/custom_list"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toStartOf="@+id/gl_main_middle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="adding"
+        android:text="@string/recyclerview"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/gl_main_middle"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/materialButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,7 +79,7 @@
         android:onClick="minus"
         android:text="@string/str_minus"
         android:textColor="@android:color/white"
-        app:icon="@drawable/ic_baseline_trending_flat_24"
+        app:icon="@drawable/ic_circle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/gl_main_middle"
         app:layout_constraintTop_toBottomOf="@+id/spin_main" />
