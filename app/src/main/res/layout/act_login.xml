@@ -18,9 +18,9 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ti_login_email"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/margin_default"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_default">
+        android:layout_margin="@dimen/margin_default"
+        android:layout_marginTop="@dimen/margin_default">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_login_email"
@@ -67,5 +67,13 @@
         android:textColor="@color/primaryDarkColor"
         android:textSize="@dimen/text_default"
         android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/primaryColor"
+        android:visibility="invisible" />
 
 </LinearLayout>
