@@ -9,15 +9,25 @@ import androidx.appcompat.app.AppCompatActivity
 import com.codedirect.footballapps.client.model.EmployeeItems
 import com.codedirect.footballapps.client.model.ResponseJSON
 import com.codedirect.footballapps.retrofit.RetrofitBase
+import com.codedirect.footballapps.session.SessionManager
 import kotlinx.android.synthetic.main.act_login.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class LoginAct : AppCompatActivity() {
+
+    private val sessionManager by lazy {
+        SessionManager(applicationContext)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_login)
+
+        //Check on Login
+        if (sessionManager.getLogin() == true)
+            navigateToMainUI()
 
         //menggunakan cara yang ke 2
         btn_login.setOnClickListener {
@@ -42,14 +52,16 @@ class LoginAct : AppCompatActivity() {
             )
         )?.enqueue(object : Callback<ResponseJSON> {
             override fun onResponse(call: Call<ResponseJSON>, response: Response<ResponseJSON>) {
-                if (response.body()?.employee.isNullOrEmpty())
+                if (response.body()?.employee.isNullOrEmpty()) {
                     Toast.makeText(
                         applicationContext,
                         "Username/Password Salah",
                         Toast.LENGTH_SHORT
                     ).show()
-                else
+                } else{
                     navigateToMainUI()
+                    sessionManager.setLogin(true)
+                }
                 loading.visibility = View.INVISIBLE
             }
 
@@ -71,7 +83,6 @@ class LoginAct : AppCompatActivity() {
         // Return yg dapat diketahui oleh pengguna
         // Toast.makeText(applicationContext, "Hello Click", Toast.LENGTH_SHORT).show()
         // Hampir sama dengan Console.log
-        Log.i("Informasinya: ", "Berhasil di klik")
         //Pemindahan Halaman, didalam Intent adalah this, kemudian kelas tujuan
         startActivity(Intent(this, RegisterAct::class.java))
     }

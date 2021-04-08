@@ -5,7 +5,6 @@ import com.codedirect.footballapps.client.APIClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
 class RetrofitBase {
 
     fun create(): APIClient? {
