@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.codedirect.footballapps.R
+import com.codedirect.footballapps.client.model.EmployeeItems
 import com.codedirect.footballapps.model.ItemCustomList
 
 class AdapterCustomRecyclerView(
-    private val dataSet: ArrayList<ItemCustomList>,
-    private val listener: (ItemCustomList?) -> Unit
+    private val dataSet: ArrayList<EmployeeItems>,
+    private val listener: (EmployeeItems?) -> Unit
 ) :
     RecyclerView.Adapter<AdapterCustomRecyclerView.ViewHolder>() {
 
@@ -30,8 +31,8 @@ class AdapterCustomRecyclerView(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvRecyclerName: TextView = view.findViewById(R.id.tv_recycler_name)
 
-        fun bindData(model: ItemCustomList, listener: (ItemCustomList?) -> Unit) {
-            tvRecyclerName.text = model.nama
+        fun bindData(model: EmployeeItems, listener: (EmployeeItems?) -> Unit) {
+            tvRecyclerName.text = model.nameUser
             itemView.setOnClickListener {
                 listener(model)
             }

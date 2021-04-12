@@ -15,15 +15,14 @@ class SessionManager(private val context: Context?) {
     var pref: SharedPreferences? = context?.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
     var editor: SharedPreferences.Editor? = pref?.edit()
 
+    //untuk memastikan bahwa pengguna sudah login
     private val is_login = "is_login"
     fun setLogin(check: Boolean) {
         editor?.putBoolean(is_login, check)
         editor?.apply()
     }
 
-    fun getLogin(): Boolean? {
-        return pref?.getBoolean(is_login, false);
-    }
+    fun getLogin(): Boolean? = pref?.getBoolean(is_login, false)
 
     private val idUser = "_id"
     fun setIDUser(data: String) {

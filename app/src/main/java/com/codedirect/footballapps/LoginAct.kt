@@ -17,6 +17,7 @@ import retrofit2.Response
 
 class LoginAct : AppCompatActivity() {
 
+    //Inisialisasi Session
     private val sessionManager by lazy {
         SessionManager(applicationContext)
     }
@@ -60,6 +61,7 @@ class LoginAct : AppCompatActivity() {
                     ).show()
                 } else{
                     navigateToMainUI()
+                    //untuk mengubah status preferensi login sudah berhasil
                     sessionManager.setLogin(true)
                 }
                 loading.visibility = View.INVISIBLE

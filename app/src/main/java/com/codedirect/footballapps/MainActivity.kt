@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.codedirect.footballapps.custom_listview.CustomListAct
+import com.codedirect.footballapps.custom_recyclerview.CustomRecyclerAct
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -95,5 +96,9 @@ class MainActivity : AppCompatActivity() {
 
     fun toCustomList(view: View) {
         startActivity(Intent(this, CustomListAct::class.java))
+    }
+
+    fun navigateToRecycler(view: View) {
+        startActivity(Intent(this, CustomRecyclerAct::class.java))
     }
 }

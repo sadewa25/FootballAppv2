@@ -5,6 +5,7 @@ import com.codedirect.footballapps.client.model.EmployeeItems
 import com.codedirect.footballapps.client.model.ResponseJSON
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface APIClient {
@@ -12,4 +13,8 @@ interface APIClient {
     fun login(
         @Body item: EmployeeItems
     ): Call<ResponseJSON>
+
+    @GET("employee/${BuildConfig.KEY}")
+    fun getEmployee(): Call<ResponseJSON>
+
 }
