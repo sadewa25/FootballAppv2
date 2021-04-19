@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -53,13 +54,18 @@ class CustomRecyclerAct : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListe
     }
 
     private fun setupRecyclerView() {
+        loading.visibility = View.VISIBLE
         //Calling the API
         val call = RetrofitBase().create()
         call?.getEmployee()?.enqueue(object : Callback<ResponseJSON> {
             override fun onResponse(call: Call<ResponseJSON>, response: Response<ResponseJSON>) {
                 adapter =
                     AdapterCustomRecyclerView(response.body()?.employee as ArrayList<EmployeeItems>) {
-                        onDeleteEmployee(it)
+                            employeeItems: EmployeeItems?, i: Int ->
+                        when(i) {
+                            0 -> onDeleteEmployee(employeeItems)
+                            1 -> onPreview()
+                        }
                     }
                 //tambahan memilih tipe layout
                 //linear layout
@@ -68,10 +74,15 @@ class CustomRecyclerAct : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListe
                 // rv_custom.layoutManager = GridLayoutManager(this, 2)
                 rv_custom.adapter = adapter
                 adapter.notifyDataSetChanged()
+                loading.visibility = View.INVISIBLE
             }
 
             override fun onFailure(call: Call<ResponseJSON>, t: Throwable) {}
         })
+    }
+
+    private fun onPreview() {
+        Toast.makeText(applicationContext, "Preview", Toast.LENGTH_SHORT).show()
     }
 
     private fun onDeleteEmployee(it: EmployeeItems?) {
@@ -89,6 +100,7 @@ class CustomRecyclerAct : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListe
                             //untuk load kembali datanya
                             setupRecyclerView()
                         }
+
                         override fun onFailure(call: Call<ResponseJSON>, t: Throwable) {}
                     })
                 dialog.dismiss()

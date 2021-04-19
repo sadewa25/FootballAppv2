@@ -5,14 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.codedirect.footballapps.R
 import com.codedirect.footballapps.client.model.EmployeeItems
+import com.squareup.picasso.Picasso
 
 class AdapterCustomRecyclerView(
     private var dataSet: ArrayList<EmployeeItems>,
-    private val listener: (EmployeeItems?) -> Unit
+    private val listener: (EmployeeItems?, Int) -> Unit
 ) :
     RecyclerView.Adapter<AdapterCustomRecyclerView.ViewHolder>(), Filterable {
 
@@ -32,12 +34,23 @@ class AdapterCustomRecyclerView(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvRecyclerName: TextView = view.findViewById(R.id.tv_recycler_name)
         val tvRecyclerEmail: TextView = view.findViewById(R.id.tv_recycler_email)
+        val ivRecycler: ImageView = view.findViewById(R.id.iv_item_recyler)
+        val ivIcon: ImageView = view.findViewById(R.id.iv_item_recycler_icon)
 
-        fun bindData(model: EmployeeItems, listener: (EmployeeItems?) -> Unit) {
+        fun bindData(model: EmployeeItems, listener: (EmployeeItems?, Int) -> Unit) {
             tvRecyclerName.text = model.nameUser
             tvRecyclerEmail.text = model.emailUser
+
+            Picasso.get()
+                .load("https://cdn0-production-images-kly.akamaized.net/gkuKdurxPqRw8u5CgAddYosm7Zk=/640x640/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/2721201/original/034457300_1549364965-20190205_Persebaya_Surabaya.jpg")
+                .placeholder(R.mipmap.ic_launcher)
+                .into(ivIcon);
+
             itemView.setOnClickListener {
-                listener(model)
+                listener(model, 0)
+            }
+            ivRecycler.setOnClickListener {
+                listener(model, 1)
             }
         }
     }
