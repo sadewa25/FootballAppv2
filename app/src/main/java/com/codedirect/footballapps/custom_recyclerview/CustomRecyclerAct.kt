@@ -1,27 +1,51 @@
 package com.codedirect.footballapps.custom_recyclerview
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.afollestad.materialdialogs.MaterialDialog
+import com.codedirect.footballapps.LoginAct
 import com.codedirect.footballapps.R
 import com.codedirect.footballapps.adapter.AdapterCustomRecyclerView
 import com.codedirect.footballapps.client.model.EmployeeItems
 import com.codedirect.footballapps.client.model.ResponseJSON
 import com.codedirect.footballapps.retrofit.RetrofitBase
+import com.codedirect.footballapps.session.SessionManager
 import kotlinx.android.synthetic.main.act_custom_recycler.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class CustomRecyclerAct : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
+
+    private lateinit var adapter: AdapterCustomRecyclerView
+    private val sessionManager by lazy {
+        SessionManager(applicationContext)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_custom_recycler)
 
         setupRecyclerView()
         setupOnRefreshLayout()
+        setupEdittextOnChanged()
+    }
+
+    private fun setupEdittextOnChanged() {
+        ed_custom_search.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun afterTextChanged(p0: Editable?) {
+                adapter.filter.filter(p0.toString())
+            }
+        })
     }
 
     private fun setupOnRefreshLayout() {
@@ -29,23 +53,13 @@ class CustomRecyclerAct : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListe
     }
 
     private fun setupRecyclerView() {
-        /*val data = arrayListOf(
-            ItemCustomList("Karpet", "Rp. 10.000", R.drawable.ic_circle),
-            //apabila tidak urut dapat menggunakan seperti dibawah
-            ItemCustomList(price = "Rp. 12.000", nama = "Nivea Men", image = R.drawable.ic_flood),
-            ItemCustomList("Biore", image = R.drawable.ic_circle),
-            ItemCustomList("Biore", image = R.drawable.ic_circle),
-            ItemCustomList("Biore", image = R.drawable.ic_circle),
-            ItemCustomList("Biore", image = R.drawable.ic_circle),
-        )*/
-
         //Calling the API
         val call = RetrofitBase().create()
         call?.getEmployee()?.enqueue(object : Callback<ResponseJSON> {
             override fun onResponse(call: Call<ResponseJSON>, response: Response<ResponseJSON>) {
-                val adapter =
+                adapter =
                     AdapterCustomRecyclerView(response.body()?.employee as ArrayList<EmployeeItems>) {
-                        Log.i("Datanya: ", it.toString())
+                        onDeleteEmployee(it)
                     }
                 //tambahan memilih tipe layout
                 //linear layout
@@ -60,9 +74,37 @@ class CustomRecyclerAct : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListe
         })
     }
 
+    private fun onDeleteEmployee(it: EmployeeItems?) {
+        MaterialDialog(this).show {
+            title(R.string.information)
+            message(R.string.confirmation_delete)
+            positiveButton(R.string.agree) { dialog ->
+                val call = RetrofitBase().create()
+                call?.deleteEmployee(it?.idUser.toString())
+                    ?.enqueue(object : Callback<ResponseJSON> {
+                        override fun onResponse(
+                            call: Call<ResponseJSON>,
+                            response: Response<ResponseJSON>
+                        ) {
+                            //untuk load kembali datanya
+                            setupRecyclerView()
+                        }
+                        override fun onFailure(call: Call<ResponseJSON>, t: Throwable) {}
+                    })
+                dialog.dismiss()
+            }
+            negativeButton(R.string.disagree) { dialog -> dialog.dismiss() }
+        }
+    }
+
     override fun onRefresh() {
         setupRecyclerView()
         //untuk menghilangkan load more
         swipe_refresh.isRefreshing = false
+    }
+
+    fun onLogout(view: View) {
+        sessionManager.setLogin(false)
+        startActivity(Intent(this, LoginAct::class.java))
     }
 }

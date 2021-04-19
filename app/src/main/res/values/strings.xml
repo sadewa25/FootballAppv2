@@ -14,6 +14,13 @@
     <string name="ic_item_custom">Ikon List Custom</string>
     <string name="custom_list">Custom List</string>
     <string name="recyclerview">RecyclerView</string>
+    <string name="searching">Cari</string>
+    <string name="logout">Logout</string>
+    <string name="username">Username</string>
+    <string name="information">Informasi</string>
+    <string name="confirmation_delete">Apakah dihapus?.,</string>
+    <string name="agree">ya</string>
+    <string name="disagree">tidak</string>
 
     <string-array name="change_value">
         <item>Kelipatan 1</item>
